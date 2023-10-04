@@ -1,0 +1,39 @@
+[
+  { "attributes": { "bold": true }, "insert": "JACK" },
+  { "insert": "\n" },
+  { "attributes": { "italic": true, "bold": true }, "insert": "haha" },
+  { "insert": "\n" },
+  { "attributes": { "underline": true }, "insert": "美好的一天" },
+  { "insert": "\n" },
+  { "attributes": { "underline": true, "strike": true }, "insert": "你好啊" },
+  { "insert": "\n" },
+  {
+    "attributes": { "underline": true, "link": "https://www.baidu.com" },
+    "insert": "百度"
+  },
+  {
+    "insert": "\n不仅是冰雪运动，党的十八大以来，各种形式的全民健身都得到前所未有的高度重视，无数热爱健身的中国人都在切身感受着变化。\n"
+  },
+  {
+    "attributes": { "background": "#ffffff", "color": "#0066cc", "bold": true },
+    "insert": "从体育强国到健康中国，人民的健康、人民的体质、人民的幸福，都是一脉相承的。这是全面小康、全面现代化的题中之义。它的意义，小中见大。"
+  },
+  { "attributes": { "list": "ordered" }, "insert": "\n" },
+  {
+    "attributes": { "background": "#ffffff", "color": "#222222" },
+    "insert": "体育是提高人民健康水平的重要手段，也是实现中国梦的重要内容，能为中华民族伟大复兴提供凝心聚气的强大精神力量。"
+  },
+  { "attributes": { "list": "ordered" }, "insert": "\n" },
+  {
+    "attributes": { "background": "#ffffff", "color": "#e60000", "bold": true },
+    "insert": "体育承载着国家强盛、民族振兴的梦想。体育强则中国强，国运兴则体育兴。"
+  },
+  { "attributes": { "list": "ordered" }, "insert": "\n" },
+  { "insert": "\nH1" },
+  { "attributes": { "header": 1 }, "insert": "\n" },
+  { "insert": "H2" },
+  { "attributes": { "header": 2 }, "insert": "\n" },
+  { "insert": "H3" },
+  { "attributes": { "header": 3 }, "insert": "\n" },
+  { "insert": "haha\n" }
+]
