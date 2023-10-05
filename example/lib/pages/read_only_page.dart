@@ -61,7 +61,17 @@ class _ReadOnlyPageState extends State<ReadOnlyPage> {
     }
     final toolbar = QuillToolbar.basic(
       controller: controller,
-      embedButtons: FlutterQuillEmbeds.buttons(),
+      showSuperscript: false,
+      showSubscript: false,
+      //embedButtons: FlutterQuillEmbeds.buttons(),
+      customButtons: [
+        QuillCustomButton(
+            icon: Icons.ac_unit,
+            tooltip: '雪花',
+            onTap: () {
+              debugPrint('snowflake');
+            })
+      ],
     );
     return Padding(
         padding: const EdgeInsets.all(8),
@@ -82,11 +92,15 @@ class _ReadOnlyPageState extends State<ReadOnlyPage> {
   }
 
   void _toggleEdit() {
-    final json =
-        jsonEncode(quillEditor?.controller.document.toDelta().toJson());
+    final delta = quillEditor?.controller.document.toDelta();
+    debugPrint('++++++++++++++delta:$delta');
+    final json = jsonEncode(delta?.toJson());
     debugPrint('++++++++++++++json:$json');
     setState(() {
       _edit = !_edit;
+      if (_edit) {
+        quillEditor?.controller.moveCursorToEnd();
+      }
     });
   }
 }
