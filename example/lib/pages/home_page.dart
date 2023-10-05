@@ -52,7 +52,8 @@ class _HomePageState extends State<HomePage> {
       final result = await rootBundle.loadString(isDesktop()
           ? 'assets/sample_data_nomedia.json'
           : 'assets/sample_data.json');
-      final doc = Document.fromJson(jsonDecode(result));
+      //final doc = Document.fromJson(jsonDecode(result));
+      final doc = Document();
       setState(() {
         _controller = QuillController(
             document: doc, selection: const TextSelection.collapsed(offset: 0));
@@ -82,10 +83,14 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-            onPressed: () => _insertTimeStamp(
-              _controller!,
-              DateTime.now().toString(),
-            ),
+            onPressed: () {
+              final json = jsonEncode(_controller!.document.toDelta().toJson());
+              debugPrint('++++++++++++++homejson:$json');
+              // _insertTimeStamp(
+              //   _controller!,
+              //   DateTime.now().toString(),
+              // );
+            },
             icon: const Icon(Icons.add_alarm_rounded),
           ),
           IconButton(
@@ -182,9 +187,9 @@ class _HomePageState extends State<HomePage> {
       focusNode: _focusNode,
       autoFocus: false,
       readOnly: false,
-      placeholder: 'Add content',
+      placeholder: '请输入会议纪要',
       enableSelectionToolbar: isMobile(),
-      expands: false,
+      expands: true,
       padding: EdgeInsets.zero,
       onImagePaste: _onImagePaste,
       onTapUp: (details, p1) {
@@ -291,14 +296,6 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Expanded(
-            flex: 15,
-            child: Container(
-              color: Colors.white,
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: quillEditor,
-            ),
-          ),
           kIsWeb
               ? Expanded(
                   child: Container(
@@ -306,7 +303,15 @@ class _HomePageState extends State<HomePage> {
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
                   child: toolbar,
                 ))
-              : Container(child: toolbar)
+              : Container(child: toolbar),
+          Expanded(
+            flex: 15,
+            child: Container(
+              color: Colors.white,
+              padding: const EdgeInsets.only(left: 8, right: 8),
+              child: quillEditor,
+            ),
+          ),
         ],
       ),
     );

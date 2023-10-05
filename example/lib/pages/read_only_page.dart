@@ -1,3 +1,7 @@
+// ignore_for_file: lines_longer_than_80_chars
+
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/extensions.dart';
@@ -16,13 +20,12 @@ class _ReadOnlyPageState extends State<ReadOnlyPage> {
   final FocusNode _focusNode = FocusNode();
 
   bool _edit = false;
+  QuillEditor? quillEditor;
 
   @override
   Widget build(BuildContext context) {
     return DemoScaffold(
-      documentFilename: isDesktop()
-          ? 'assets/sample_data_nomedia.json'
-          : 'sample_data_nomedia.json',
+      documentFilename: isDesktop() ? 'assets/test.json' : 'test.json',
       builder: _buildContent,
       showToolbar: _edit == true,
       floatingActionButton: FloatingActionButton.extended(
@@ -33,7 +36,7 @@ class _ReadOnlyPageState extends State<ReadOnlyPage> {
   }
 
   Widget _buildContent(BuildContext context, QuillController? controller) {
-    var quillEditor = QuillEditor(
+    quillEditor = QuillEditor(
       controller: controller!,
       scrollController: ScrollController(),
       scrollable: true,
@@ -56,19 +59,32 @@ class _ReadOnlyPageState extends State<ReadOnlyPage> {
           padding: EdgeInsets.zero,
           embedBuilders: defaultEmbedBuildersWeb);
     }
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.grey.shade200),
-        ),
-        child: quillEditor,
-      ),
+    final toolbar = QuillToolbar.basic(
+      controller: controller,
+      embedButtons: FlutterQuillEmbeds.buttons(),
     );
+    return Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (_edit) toolbar,
+            Expanded(
+                child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.grey.shade200),
+              ),
+              child: quillEditor,
+            ))
+          ],
+        ));
   }
 
   void _toggleEdit() {
+    final json =
+        jsonEncode(quillEditor?.controller.document.toDelta().toJson());
+    debugPrint('++++++++++++++json:$json');
     setState(() {
       _edit = !_edit;
     });
