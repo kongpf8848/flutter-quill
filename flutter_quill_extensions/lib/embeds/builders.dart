@@ -11,8 +11,7 @@ import 'package:math_keyboard/math_keyboard.dart';
 import 'package:universal_html/html.dart' as html;
 
 import '../shims/dart_ui_fake.dart'
-    if (dart.library.html) 'package:flutter_quill_extensions/shims/dart_ui_real.dart'
-    as ui;
+    if (dart.library.html) '../shims/dart_ui_real.dart' as ui;
 import 'embed_types.dart';
 import 'utils.dart';
 import 'widgets/image.dart';
@@ -21,13 +20,13 @@ import 'widgets/video_app.dart';
 import 'widgets/youtube_video_app.dart';
 
 class ImageEmbedBuilder extends EmbedBuilder {
-  ImageEmbedBuilder({
-    required this.afterRemoveImageFromEditor,
-    required this.shouldRemoveImageFromEditor,
+  const ImageEmbedBuilder({
+    this.onImageRemovedCallback,
+    this.shouldRemoveImageCallback,
   });
-  final ImageEmbedBuilderAfterRemoveImageFromEditor afterRemoveImageFromEditor;
-  final ImageEmbedBuilderShouldRemoveImageFromEditor
-      shouldRemoveImageFromEditor;
+
+  final ImageEmbedBuilderOnRemovedCallback? onImageRemovedCallback;
+  final ImageEmbedBuilderWillRemoveCallback? shouldRemoveImageCallback;
 
   @override
   String get key => BlockEmbed.imageType;
@@ -136,12 +135,13 @@ class ImageEmbedBuilder extends EmbedBuilder {
                     Navigator.of(context).pop();
 
                     final imageFile = File(imageUrl);
-                    final shouldRemoveImage =
-                        await shouldRemoveImageFromEditor(imageFile);
 
-                    if (!shouldRemoveImage) {
+                    // Call the remove check callback if set
+                    if (await shouldRemoveImageCallback?.call(imageFile) ==
+                        false) {
                       return;
                     }
+
                     final offset = getEmbedNode(
                       controller,
                       controller.selection.start,
@@ -152,7 +152,9 @@ class ImageEmbedBuilder extends EmbedBuilder {
                       '',
                       TextSelection.collapsed(offset: offset),
                     );
-                    await afterRemoveImageFromEditor(imageFile);
+
+                    // Call the post remove callback if set
+                    await onImageRemovedCallback?.call(imageFile);
                   },
                 );
                 return Padding(
