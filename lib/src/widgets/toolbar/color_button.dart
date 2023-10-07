@@ -278,6 +278,9 @@ class _ColorButtonState extends State<ColorButton> {
   }
 
   String colorToHex(Color color) {
-    return color.value.toRadixString(16).padLeft(8, '0').toUpperCase();
+    //return color.value.toRadixString(16).padLeft(8, '0').toUpperCase();
+    return color.red.toRadixString(16).padLeft(2, '0').toUpperCase() +
+        color.green.toRadixString(16).padLeft(2, '0').toUpperCase() +
+        color.blue.toRadixString(16).padLeft(2, '0').toUpperCase();
   }
 }

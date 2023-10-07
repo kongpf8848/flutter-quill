@@ -63,13 +63,17 @@ class _ReadOnlyPageState extends State<ReadOnlyPage> {
       controller: controller,
       showSuperscript: false,
       showSubscript: false,
+      showDirection: true,
+      showAlignmentButtons: true,
       //embedButtons: FlutterQuillEmbeds.buttons(),
       customButtons: [
         QuillCustomButton(
             icon: Icons.ac_unit,
-            tooltip: '雪花',
+            tooltip: 'Fake',
             onTap: () {
               debugPrint('snowflake');
+              quillEditor?.controller
+                  .formatSelection(const StrikeThroughAttribute());
             })
       ],
     );
