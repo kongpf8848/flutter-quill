@@ -16,6 +16,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../universal_ui/universal_ui.dart';
 import '../widgets/time_stamp_embed_widget.dart';
+import 'home_page_2.dart';
 import 'read_only_page.dart';
 
 enum _SelectionType {
@@ -52,8 +53,8 @@ class _HomePageState extends State<HomePage> {
       final result = await rootBundle.loadString(isDesktop()
           ? 'assets/sample_data_nomedia.json'
           : 'assets/sample_data.json');
-      //final doc = Document.fromJson(jsonDecode(result));
-      final doc = Document();
+      final doc = Document.fromJson(jsonDecode(result));
+      //final doc = Document();
       setState(() {
         _controller = QuillController(
             document: doc, selection: const TextSelection.collapsed(offset: 0));
@@ -86,10 +87,10 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               final json = jsonEncode(_controller!.document.toDelta().toJson());
               debugPrint('++++++++++++++homejson:$json');
-              // _insertTimeStamp(
-              //   _controller!,
-              //   DateTime.now().toString(),
-              // );
+              _insertTimeStamp(
+                _controller!,
+                DateTime.now().toString(),
+              );
             },
             icon: const Icon(Icons.add_alarm_rounded),
           ),
@@ -449,7 +450,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
       super.context,
       MaterialPageRoute(
-        builder: (context) => ReadOnlyPage(),
+        builder: (context) => HomePage2(),
       ),
     );
   }
@@ -472,9 +473,10 @@ class _HomePageState extends State<HomePage> {
       ChangeSource.LOCAL,
     );
 
+    final cc = <String, dynamic>{'name': 'jack', 'uid': '123456'};
     controller.document.insert(
       controller.selection.extentOffset,
-      TimeStampEmbed(string),
+      TimeStampEmbed(cc),
     );
 
     controller.updateSelection(
@@ -492,12 +494,12 @@ class _HomePageState extends State<HomePage> {
       ChangeSource.LOCAL,
     );
 
-    controller.document.insert(controller.selection.extentOffset, '\n');
-    controller.updateSelection(
-      TextSelection.collapsed(
-        offset: controller.selection.extentOffset + 1,
-      ),
-      ChangeSource.LOCAL,
-    );
+    // controller.document.insert(controller.selection.extentOffset, '\n');
+    // controller.updateSelection(
+    //   TextSelection.collapsed(
+    //     offset: controller.selection.extentOffset + 1,
+    //   ),
+    //   ChangeSource.LOCAL,
+    // );
   }
 }

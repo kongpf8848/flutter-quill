@@ -5,10 +5,10 @@ import 'package:flutter_quill/flutter_quill.dart' hide Text;
 
 class TimeStampEmbed extends Embeddable {
   const TimeStampEmbed(
-    String value,
+    dynamic value,
   ) : super(timeStampType, value);
 
-  static const String timeStampType = 'timeStamp';
+  static const String timeStampType = 'mention';
 
   static TimeStampEmbed fromDocument(Document document) =>
       TimeStampEmbed(jsonEncode(document.toDelta().toJson()));
@@ -18,7 +18,7 @@ class TimeStampEmbed extends Embeddable {
 
 class TimeStampEmbedBuilderWidget extends EmbedBuilder {
   @override
-  String get key => 'timeStamp';
+  String get key => 'mention';
 
   @override
   String toPlainText(Embed embed) {
@@ -37,7 +37,7 @@ class TimeStampEmbedBuilderWidget extends EmbedBuilder {
     return Row(
       children: [
         const Icon(Icons.access_time_rounded),
-        Text(node.value.data as String),
+        Text((node.value.data as Map)['name']),
       ],
     );
   }

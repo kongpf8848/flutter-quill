@@ -28,6 +28,11 @@
     }
   },
   {
+    "insert": {
+       "mention":{"name":"小飞飞","uid":"63804687783034"}
+    }
+  },
+  {
     "insert": "\nRich text editor for Flutter"
   },
   {

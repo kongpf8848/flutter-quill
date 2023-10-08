@@ -65,7 +65,7 @@ class _ReadOnlyPageState extends State<ReadOnlyPage> {
       showSubscript: false,
       showDirection: true,
       showAlignmentButtons: true,
-      //embedButtons: FlutterQuillEmbeds.buttons(),
+      embedButtons: FlutterQuillEmbeds.buttons(),
       customButtons: [
         QuillCustomButton(
             icon: Icons.ac_unit,
