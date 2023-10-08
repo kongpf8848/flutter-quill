@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
-import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
+import 'package:flutter_quill/flutter_quill_extensions.dart';
 import 'package:path_provider/path_provider.dart';
 
 typedef DemoContentBuilder = Widget Function(
