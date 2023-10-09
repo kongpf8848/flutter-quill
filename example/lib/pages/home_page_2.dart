@@ -362,6 +362,11 @@ class _HomePage2State extends State<HomePage2> {
       /// You can add your own web site
       _controller!.formatSelection(
           LinkAttribute('https://www.google.com/search?q=$userId'));
+      // final cc = <String, dynamic>{'name': 'jack', 'uid': '123456'};
+      // _controller?.document.insert(
+      //   _controller!.selection.extentOffset,
+      //   TimeStampEmbed(cc),
+      // );
     }
     Future.delayed(Duration.zero).then((value) {
       _controller!.moveCursorToEnd();
@@ -437,7 +442,7 @@ class _HomePage2State extends State<HomePage2> {
           TextButton(
             onPressed: () {
               final json = jsonEncode(_controller!.document.toDelta().toJson());
-              print(json);
+              debugPrint('+++++++++++++++++++++++json:$json');
             },
             child: const Text(
               'Preview',

@@ -53,8 +53,8 @@ class _HomePageState extends State<HomePage> {
       final result = await rootBundle.loadString(isDesktop()
           ? 'assets/sample_data_nomedia.json'
           : 'assets/sample_data.json');
-      final doc = Document.fromJson(jsonDecode(result));
-      //final doc = Document();
+      //final doc = Document.fromJson(jsonDecode(result));
+      final doc = Document();
       setState(() {
         _controller = QuillController(
             document: doc, selection: const TextSelection.collapsed(offset: 0));
@@ -465,7 +465,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   static void _insertTimeStamp(QuillController controller, String string) {
-    controller.document.insert(controller.selection.extentOffset, '\n');
+    //controller.document.insert(controller.selection.extentOffset, '\n');
     controller.updateSelection(
       TextSelection.collapsed(
         offset: controller.selection.extentOffset + 1,
@@ -479,20 +479,20 @@ class _HomePageState extends State<HomePage> {
       TimeStampEmbed(cc),
     );
 
-    controller.updateSelection(
-      TextSelection.collapsed(
-        offset: controller.selection.extentOffset + 1,
-      ),
-      ChangeSource.LOCAL,
-    );
+    // controller.updateSelection(
+    //   TextSelection.collapsed(
+    //     offset: controller.selection.extentOffset + 1,
+    //   ),
+    //   ChangeSource.LOCAL,
+    // );
 
-    controller.document.insert(controller.selection.extentOffset, ' ');
-    controller.updateSelection(
-      TextSelection.collapsed(
-        offset: controller.selection.extentOffset + 1,
-      ),
-      ChangeSource.LOCAL,
-    );
+    // controller.document.insert(controller.selection.extentOffset, ' ');
+    // controller.updateSelection(
+    //   TextSelection.collapsed(
+    //     offset: controller.selection.extentOffset + 1,
+    //   ),
+    //   ChangeSource.LOCAL,
+    // );
 
     // controller.document.insert(controller.selection.extentOffset, '\n');
     // controller.updateSelection(

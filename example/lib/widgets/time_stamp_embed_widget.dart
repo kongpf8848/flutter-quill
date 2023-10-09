@@ -34,11 +34,6 @@ class TimeStampEmbedBuilderWidget extends EmbedBuilder {
     bool inline,
     TextStyle textStyle,
   ) {
-    return Row(
-      children: [
-        const Icon(Icons.access_time_rounded),
-        Text((node.value.data as Map)['name']),
-      ],
-    );
+    return Text((node.value.data as Map)['name']);
   }
 }
