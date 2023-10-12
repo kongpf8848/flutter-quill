@@ -15,10 +15,10 @@ class SelectHeaderStyleButton extends StatefulWidget {
     this.iconSize = kDefaultIconSize,
     this.iconTheme,
     this.attributes = const [
-      Attribute.header,
+      //Attribute.header,
       Attribute.h1,
       Attribute.h2,
-      Attribute.h3,
+      //Attribute.h3,
     ],
     this.afterButtonPressed,
     this.tooltip,
@@ -44,10 +44,10 @@ class _SelectHeaderStyleButtonState extends State<SelectHeaderStyleButton> {
   Style get _selectionStyle => widget.controller.getSelectionStyle();
 
   final _valueToText = <Attribute, String>{
-    Attribute.header: 'N',
+    //Attribute.header: 'N',
     Attribute.h1: 'H1',
     Attribute.h2: 'H2',
-    Attribute.h3: 'H3',
+    //Attribute.h3: 'H3',
   };
 
   @override
