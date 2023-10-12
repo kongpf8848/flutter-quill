@@ -450,7 +450,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
       super.context,
       MaterialPageRoute(
-        builder: (context) => HomePage2(),
+        builder: (context) => ReadOnlyPage(),
       ),
     );
   }

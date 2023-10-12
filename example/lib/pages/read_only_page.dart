@@ -71,9 +71,18 @@ class _ReadOnlyPageState extends State<ReadOnlyPage> {
             icon: Icons.ac_unit,
             tooltip: 'Fake',
             onTap: () {
-              debugPrint('snowflake');
-              quillEditor?.controller
-                  .formatSelection(const StrikeThroughAttribute());
+              debugPrint(
+                  '++++++++++++snowflake11:${controller.selection.extentOffset}');
+              controller.document
+                  .insert(controller.selection.extentOffset, '@');
+              debugPrint(
+                  '++++++++++++snowflake22:${controller.selection.extentOffset}');
+              controller.updateSelection(
+                TextSelection.collapsed(
+                  offset: controller.selection.extentOffset + 1,
+                ),
+                ChangeSource.LOCAL,
+              );
             })
       ],
     );
