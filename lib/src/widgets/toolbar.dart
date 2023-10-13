@@ -42,7 +42,7 @@ export 'toolbar/toggle_check_list_button.dart';
 export 'toolbar/toggle_style_button.dart';
 
 /// The default size of the icon of a button.
-const double kDefaultIconSize = 18;
+const double kDefaultIconSize = 24;
 
 /// The factor of how much larger the button is in relation to the icon.
 const double kIconButtonFactor = 1.77;
