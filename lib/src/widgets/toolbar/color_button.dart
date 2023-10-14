@@ -125,14 +125,21 @@ class _ColorButtonState extends State<ColorButton> {
       highlightElevation: 0,
       hoverElevation: 0,
       size: widget.iconSize * kIconButtonFactor,
-      icon: Icon(widget.icon,
-          size: widget.iconSize,
-          color: widget.background ? iconColorBackground : iconColor),
+      icon: Icon(widget.icon, size: widget.iconSize, color: iconColor),
       fillColor: widget.background ? fillColorBackground : fillColor,
       borderRadius: widget.iconTheme?.borderRadius ?? 2,
-      onPressed: _showColorPicker,
+      onPressed: () {
+        _highlight(context);
+      },
       afterPressed: widget.afterButtonPressed,
     );
+  }
+
+  void _highlight(BuildContext context) {
+    const hex = '#33FF7D00';
+    widget.controller.formatSelection(widget.background
+        ? const BackgroundAttribute(hex)
+        : const ColorAttribute(hex));
   }
 
   void _changeColor(BuildContext context, Color color) {
@@ -278,9 +285,6 @@ class _ColorButtonState extends State<ColorButton> {
   }
 
   String colorToHex(Color color) {
-    //return color.value.toRadixString(16).padLeft(8, '0').toUpperCase();
-    return color.red.toRadixString(16).padLeft(2, '0').toUpperCase() +
-        color.green.toRadixString(16).padLeft(2, '0').toUpperCase() +
-        color.blue.toRadixString(16).padLeft(2, '0').toUpperCase();
+    return color.value.toRadixString(16).padLeft(8, '0').toUpperCase();
   }
 }

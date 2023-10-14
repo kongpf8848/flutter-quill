@@ -30,24 +30,26 @@ class _ArrowIndicatedButtonListState extends State<ArrowIndicatedButtonList>
   @override
   void initState() {
     super.initState();
-    _controller.addListener(_handleScroll);
+    //_controller.addListener(_handleScroll);
 
     // Listening to the WidgetsBinding instance is necessary so that we can
     // hide the arrows when the window gets a new size and thus the toolbar
     // becomes scrollable/unscrollable.
-    WidgetsBinding.instance.addObserver(this);
+    //WidgetsBinding.instance.addObserver(this);
 
     // Workaround to allow the scroll controller attach to our ListView so that
     // we can detect if overflow arrows need to be shown on init.
-    Timer.run(_handleScroll);
+    //Timer.run(_handleScroll);
   }
 
   @override
   Widget build(BuildContext context) {
     final children = <Widget>[
-      _buildBackwardArrow(),
+      //_buildBackwardArrow(),
       _buildScrollableList(),
-      _buildForwardArrow(),
+      //_buildForwardArrow(),
+      //_buildShadow(),
+      _buildKeyboardButton()
     ];
 
     return widget.axis == Axis.horizontal
@@ -147,6 +149,32 @@ class _ArrowIndicatedButtonListState extends State<ArrowIndicatedButtonList>
         // Move the icon a few pixels to center it
         offset: const Offset(-5, 0),
         child: icon != null ? Icon(icon, size: 18) : null,
+      ),
+    );
+  }
+
+  Widget _buildKeyboardButton() {
+    return Container(
+      width: 48,
+      height: 48,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            offset: const Offset(-5, 0),
+            blurRadius: 5,
+          ),
+        ],
+      ),
+      child: IconButton(
+        icon: const Icon(
+          Icons.keyboard_hide_outlined,
+        ),
+        iconSize: 30,
+        onPressed: () {
+          FocusScope.of(context).unfocus();
+        },
       ),
     );
   }

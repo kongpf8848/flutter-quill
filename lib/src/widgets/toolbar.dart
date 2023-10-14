@@ -276,6 +276,16 @@ class QuillToolbar extends StatelessWidget implements PreferredSizeWidget {
             iconTheme: iconTheme,
             afterButtonPressed: afterButtonPressed,
           ),
+        if (showBackgroundColorButton)
+          ColorButton(
+            icon: Icons.format_color_fill,
+            iconSize: toolbarIconSize,
+            tooltip: buttonTooltips[ToolbarButtons.backgroundColor],
+            controller: controller,
+            background: true,
+            iconTheme: iconTheme,
+            afterButtonPressed: afterButtonPressed,
+          ),
         if (showUnderLineButton)
           ToggleStyleButton(
             attribute: Attribute.underline,
@@ -452,16 +462,6 @@ class QuillToolbar extends StatelessWidget implements PreferredSizeWidget {
             tooltip: buttonTooltips[ToolbarButtons.color],
             controller: controller,
             background: false,
-            iconTheme: iconTheme,
-            afterButtonPressed: afterButtonPressed,
-          ),
-        if (showBackgroundColorButton)
-          ColorButton(
-            icon: Icons.format_color_fill,
-            iconSize: toolbarIconSize,
-            tooltip: buttonTooltips[ToolbarButtons.backgroundColor],
-            controller: controller,
-            background: true,
             iconTheme: iconTheme,
             afterButtonPressed: afterButtonPressed,
           ),
